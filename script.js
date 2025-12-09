@@ -1,7 +1,7 @@
 // Demo data (replace with API later)
 const MOVIES = [
   {
-    id: 6,
+    id: 1,
     title: "F1: The Movie",
     year: 2025,
     genres: ["Drama", "Thriller", "Sport"],
@@ -10,7 +10,29 @@ const MOVIES = [
     poster: "https://miro.medium.com/v2/resize:fit:640/format:webp/1*KR0XW9mJHCRp9WMlbjvfEw.jpeg",
     overview: "A Formula One driver comes out of retirement to mentor and team up with a younger driver.",
     trailer: "https://megaup.net/3762f4152f285d9856ed4657759f7957/F1_The_Movie_2025_[Uploaded_By_Vihan_Nethmira].mkv"
-  }
+  },
+  {
+    id: 2,
+    title: "127 Hours",
+    year: 2010,
+    genres: ["Thriller", "Adventure"],
+    rating: 7.5,
+    popularity: 2492,
+    poster: "https://upload.wikimedia.org/wikipedia/en/b/b3/127_Hours_Poster.jpg",
+    overview: "A mountain climber becomes trapped under a boulder while canyoneering alone near Moab, Utah and resorts to desperate measures in order to survive.",
+    trailer: "https://megaup.net/d62cd73e71aa426205ee85257954244b/127_Hours_2010_[VNET_MOVIES].mkv"
+  },
+  {
+    id: 3,
+    title: "The Conjuring: Last Rites",
+    year: 2025,
+    genres: ["Horror "],
+    rating: 7.5,
+    popularity: 100,
+    poster: "https://play-lh.googleusercontent.com/UkmdZlGJu-qcy3ue7IidfF2l3WD9BbNPcchOToBnYQHg6zORNuPSFKy5Xt8NbYQ7MpxyZz1KaBt7AJV5yoVB=w240-h480-rw",
+    overview: "Paranormal investigators Ed and Lorraine Warren take on one last terrifying case involving mysterious entities they must confront.",
+    trailer: "https://megaup.net/f4454bebd0135e1c553104e5c23eefa1/The_Conjuring_Last_Rites_2025_[VNET_MOVIES].mkv"
+  },
   
 ];
 
@@ -154,6 +176,7 @@ function openModal(movie){
     // Fallback if <dialog> unsupported
     movieModal.setAttribute("open", "");
   }
+  
 }
 
 function addToWatchlist(movie){
