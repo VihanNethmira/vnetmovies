@@ -142,3 +142,67 @@ body{
 @media (max-width:700px){
   .modal-content{grid-template-columns:1fr}
 }
+
+/* Responsive Enhancements */
+
+/* Small devices (phones) */
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .8rem;
+  }
+
+  .controls {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .controls input, .controls select {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr; /* single column */
+  }
+
+  .card {
+    border-radius: .6rem;
+  }
+
+  .watchlist {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    max-height: 40vh;
+    border-radius: .6rem .6rem 0 0;
+  }
+}
+
+/* Medium devices (tablets) */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .modal-content {
+    grid-template-columns: 1fr; /* stack image and info */
+  }
+
+  .watchlist {
+    width: 90%;
+    right: .5rem;
+    bottom: .5rem;
+  }
+}
+
+/* Large devices (desktops) */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .modal-content {
+    grid-template-columns: 220px 1fr;
+  }
+}
