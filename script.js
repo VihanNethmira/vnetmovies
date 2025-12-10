@@ -38,12 +38,12 @@ const MOVIES = [
     title: "Interstellar",
     year: 2014,
     genres: ["Sci-fi", "Adventure"],
-    rating: 8,7,
+    rating: 8.7,
     popularity: 93,
     poster: "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg",
     overview: "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
-    trailer: "wefwef"
-  }
+    trailer: "#"
+  },
 ];
 
 const grid = document.getElementById("grid");
@@ -228,7 +228,3 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
-
-
-
-
