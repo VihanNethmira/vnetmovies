@@ -55,6 +55,17 @@ const MOVIES = [
     overview: "Join filmmaker Christopher Nolan and his cast and crew as they reveal the secrets of Inception, its development, characters, performances, story and jaw-dropping special effects in this solid 14-segments piece.",
     trailer: "#"
   },
+  {
+    id: 6,
+    title: "Jurassic World: Rebirth",
+    year: 2025,
+    genres: ["Sci-fi", "Action"],
+    rating: 8,
+    popularity: 89,
+    poster: "https://play-lh.googleusercontent.com/hoXWWwTBGZIdrOklQPlgtAXBtI5TDA3GqDuH-cdsABxNTM-wMVFzl8vRwctkUPs05h9iIRN-Oa68Foh_RQ",
+    overview: "Five years post-Jurassic World: Dominion (2022), an expedition braves isolated equatorial regions to extract DNA from three massive prehistoric creatures for a groundbreaking medical breakthrough.",
+    trailer: "#"
+  },
 ];
 
 const grid = document.getElementById("grid");
@@ -239,6 +250,7 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
+
 
 
 
