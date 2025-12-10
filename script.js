@@ -64,7 +64,7 @@ const MOVIES = [
     popularity: 89,
     poster: "https://play-lh.googleusercontent.com/hoXWWwTBGZIdrOklQPlgtAXBtI5TDA3GqDuH-cdsABxNTM-wMVFzl8vRwctkUPs05h9iIRN-Oa68Foh_RQ",
     overview: "Five years post-Jurassic World: Dominion (2022), an expedition braves isolated equatorial regions to extract DNA from three massive prehistoric creatures for a groundbreaking medical breakthrough.",
-    trailer: "#"
+    trailer: "https://megaup.net/d3133d09b80dcf862900a2ddb41a7570/Jurassic_World_Rebirth_2025_[VNET_MOVIES].mkv"
   },
 ];
 
@@ -250,6 +250,7 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
+
 
 
 
