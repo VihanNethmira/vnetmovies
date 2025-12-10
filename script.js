@@ -53,7 +53,7 @@ const MOVIES = [
     popularity: 93,
     poster: "https://m.media-amazon.com/images/M/MV5BZjhkNjM0ZTMtNGM5MC00ZTQ3LTk3YmYtZTkzYzdiNWE0ZTA2XkEyXkFqcGc@._V1_.jpg",
     overview: "Join filmmaker Christopher Nolan and his cast and crew as they reveal the secrets of Inception, its development, characters, performances, story and jaw-dropping special effects in this solid 14-segments piece.",
-    trailer: "#"
+    trailer: "https://megaup.net/62121beef261472228174fab5f2df757/Inception_2010_[VNET_MOVIES].mkv"
   },
   {
     id: 6,
@@ -250,6 +250,7 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
+
 
 
 
