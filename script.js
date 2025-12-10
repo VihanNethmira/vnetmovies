@@ -44,6 +44,17 @@ const MOVIES = [
     overview: "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
     trailer: "#"
   },
+  {
+    id: 5,
+    title: "Inception: Jump Right Into the Action",
+    year: 2010,
+    genres: ["Sci-fi", "Action"],
+    rating: 8.8,
+    popularity: 93,
+    poster: "https://m.media-amazon.com/images/M/MV5BZjhkNjM0ZTMtNGM5MC00ZTQ3LTk3YmYtZTkzYzdiNWE0ZTA2XkEyXkFqcGc@._V1_.jpg",
+    overview: "Join filmmaker Christopher Nolan and his cast and crew as they reveal the secrets of Inception, its development, characters, performances, story and jaw-dropping special effects in this solid 14-segments piece.",
+    trailer: "#"
+  },
 ];
 
 const grid = document.getElementById("grid");
@@ -228,4 +239,5 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
+
 
