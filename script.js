@@ -9,7 +9,7 @@ const MOVIES = [
     popularity: 70,
     poster: "https://miro.medium.com/v2/resize:fit:640/format:webp/1*KR0XW9mJHCRp9WMlbjvfEw.jpeg",
     overview: "A Formula One driver comes out of retirement to mentor and team up with a younger driver.",
-    trailer: "https://usersdrive.com/7az7kgcde5ck.html"
+    trailer: "https://megaup.net/70b154a106f62fff1fdc726e504aa1cb/F1_The_Movie_2025_[VNET_MOVIES].mkv"
   },
   {
     id: 2,
@@ -250,6 +250,7 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
+
 
 
 
