@@ -66,6 +66,17 @@ const MOVIES = [
     overview: "Five years post-Jurassic World: Dominion (2022), an expedition braves isolated equatorial regions to extract DNA from three massive prehistoric creatures for a groundbreaking medical breakthrough.",
     trailer: "https://megaup.net/d3133d09b80dcf862900a2ddb41a7570/Jurassic_World_Rebirth_2025_[VNET_MOVIES].mkv"
   },
+  {
+    id: 7,
+    title: "Saiyaara",
+    year: 2025,
+    genres: ["Hindi", "Romance", "Drama"],
+    rating: 6.3,
+    popularity: 1642,
+    poster: "https://m.media-amazon.com/images/M/MV5BMTk2ZmFhYjctYWZiYy00N2IxLWEzMWItZGRiMDY4ZDQwZWFlXkEyXkFqcGc@._V1_.jpg",
+    overview: "Vaani and Krish will have to navigate life, their problems, their insecurities to hopefully realise that only love can be the answer to everything.(ආදරය පමණක් සියල්ලට පිළිතුර විය හැකි බව අවබෝධ කර ගැනීම සඳහා වානි සහ ක්‍රිෂ් ජීවිතය, ඔවුන්ගේ ගැටළු සහ අනාරක්ෂිත බව හරහා ගමන් කළ යුතුය.)",
+    trailer: "#"
+  },
 ];
 
 const grid = document.getElementById("grid");
@@ -250,6 +261,7 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
+
 
 
 
