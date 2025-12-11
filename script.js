@@ -74,7 +74,7 @@ const MOVIES = [
     rating: 6.3,
     popularity: 1642,
     poster: "https://m.media-amazon.com/images/M/MV5BMTk2ZmFhYjctYWZiYy00N2IxLWEzMWItZGRiMDY4ZDQwZWFlXkEyXkFqcGc@._V1_.jpg",
-    overview: "Vaani and Krish will have to navigate life, their problems, their insecurities to hopefully realise that only love can be the answer to everything.(ආදරය පමණක් සියල්ලට පිළිතුර විය හැකි බව අවබෝධ කර ගැනීම සඳහා වානි සහ ක්‍රිෂ් ජීවිතය, ඔවුන්ගේ ගැටළු සහ අනාරක්ෂිත බව හරහා ගමන් කළ යුතුය.)",
+    overview: "Vaani and Krish will have to navigate life, their problems, their insecurities to hopefully realise that only love can be the answer to everything.(අසීමාන්තික ආදරය)",
     trailer: "#"
   },
 ];
@@ -261,6 +261,7 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
+
 
 
 
