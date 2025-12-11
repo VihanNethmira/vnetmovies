@@ -75,7 +75,7 @@ const MOVIES = [
     popularity: 2,
     poster: "https://m.media-amazon.com/images/M/MV5BMTk2ZmFhYjctYWZiYy00N2IxLWEzMWItZGRiMDY4ZDQwZWFlXkEyXkFqcGc@._V1_.jpg",
     overview: "Vaani and Krish will have to navigate life, their problems, their insecurities to hopefully realise that only love can be the answer to everything.(අසීමාන්තික ආදරය)",
-    trailer: "#"
+    trailer: "https://megaup.net/6d298a51f354a0e4e7eed90e1110e703/Saiyaara_2025_[VNET_MOVIES].mkv"
   },
 ];
 
@@ -261,6 +261,7 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
+
 
 
 
