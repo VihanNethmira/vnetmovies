@@ -6,7 +6,7 @@ const MOVIES = [
     year: 2025,
     genres: ["Drama", "Thriller", "Sport"],
     rating: 7.7,
-    popularity: 70,
+    popularity: 1,
     poster: "https://miro.medium.com/v2/resize:fit:640/format:webp/1*KR0XW9mJHCRp9WMlbjvfEw.jpeg",
     overview: "A Formula One driver comes out of retirement to mentor and team up with a younger driver.",
     trailer: "https://megaup.net/70b154a106f62fff1fdc726e504aa1cb/F1_The_Movie_2025_[VNET_MOVIES].mkv"
@@ -39,7 +39,7 @@ const MOVIES = [
     year: 2014,
     genres: ["Sci-fi", "Adventure"],
     rating: 8.7,
-    popularity: 93,
+    popularity: 5,
     poster: "https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
     overview: "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
     trailer: "https://megaup.net/33e115609983bdfacf256f8619bed8fe/Interstellar_2014_[VNET_MOVIES].mkv"
@@ -50,7 +50,7 @@ const MOVIES = [
     year: 2010,
     genres: ["Sci-fi", "Action"],
     rating: 8.8,
-    popularity: 93,
+    popularity: 4,
     poster: "https://m.media-amazon.com/images/M/MV5BZjhkNjM0ZTMtNGM5MC00ZTQ3LTk3YmYtZTkzYzdiNWE0ZTA2XkEyXkFqcGc@._V1_.jpg",
     overview: "Join filmmaker Christopher Nolan and his cast and crew as they reveal the secrets of Inception, its development, characters, performances, story and jaw-dropping special effects in this solid 14-segments piece.",
     trailer: "https://megaup.net/62121beef261472228174fab5f2df757/Inception_2010_[VNET_MOVIES].mkv"
@@ -61,7 +61,7 @@ const MOVIES = [
     year: 2025,
     genres: ["Sci-fi", "Action"],
     rating: 8,
-    popularity: 89,
+    popularity: 3,
     poster: "https://play-lh.googleusercontent.com/hoXWWwTBGZIdrOklQPlgtAXBtI5TDA3GqDuH-cdsABxNTM-wMVFzl8vRwctkUPs05h9iIRN-Oa68Foh_RQ",
     overview: "Five years post-Jurassic World: Dominion (2022), an expedition braves isolated equatorial regions to extract DNA from three massive prehistoric creatures for a groundbreaking medical breakthrough.",
     trailer: "https://megaup.net/d3133d09b80dcf862900a2ddb41a7570/Jurassic_World_Rebirth_2025_[VNET_MOVIES].mkv"
@@ -72,7 +72,7 @@ const MOVIES = [
     year: 2025,
     genres: ["Hindi", "Romance", "Drama"],
     rating: 6.3,
-    popularity: 1642,
+    popularity: 2,
     poster: "https://m.media-amazon.com/images/M/MV5BMTk2ZmFhYjctYWZiYy00N2IxLWEzMWItZGRiMDY4ZDQwZWFlXkEyXkFqcGc@._V1_.jpg",
     overview: "Vaani and Krish will have to navigate life, their problems, their insecurities to hopefully realise that only love can be the answer to everything.(අසීමාන්තික ආදරය)",
     trailer: "#"
@@ -261,6 +261,7 @@ function escapeHTML(str){
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
   }[s]));
 }
+
 
 
 
