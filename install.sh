@@ -15,7 +15,7 @@ export DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a NEEDRESTART_SUSPEND=1  
 # =====================================================================
 SERVICE_NAME="vnet-bot"
 APP_PORT="8080"                    # uvicorn (ඇතුළත විතරයි - nginx හරහා යන්නේ)
-DEFAULT_DOMAIN="vnet.store"
+DEFAULT_DOMAIN="mov.vnet.store"
 GITHUB_REPO="${GITHUB_REPO:-VihanNethmira/vnetmovies}"
 GITHUB_TOKEN="${GITHUB_TOKEN:-}"   # private repo නම් විතරයි
 ASSET_NAME="VNET_Movies.zip"       # release asset එක; නැත්නම් source zipball එක පාවිච්චි කරනවා
@@ -150,6 +150,11 @@ patch_bot() {
         echo "  ✅ stream_bot.py patched (links -> https://$(get_env DOMAIN), port නැතුව)"
     else
         echo "  ℹ️ stream_bot.py links patch අවශ්‍ය නෑ."
+    fi
+    # uvicorn localhost එකට විතරක් bind කරනවා -> http://IP:8080 පිටින් කෙළින්ම යන්න බෑ, nginx හරහා විතරයි
+    if grep -q 'uvicorn.run(app, host="0.0.0.0"' "$f"; then
+        sed -i 's|uvicorn.run(app, host="0.0.0.0"|uvicorn.run(app, host="127.0.0.1"|' "$f"
+        echo "  ✅ stream_bot.py patched (uvicorn -> 127.0.0.1:$APP_PORT)"
     fi
     return 0
 }
@@ -397,16 +402,56 @@ setup_firewall() {
         local sp; sp="$(sshd -T 2>/dev/null | awk '/^port /{print $2; exit}')"
         ufw allow "${sp:-22}/tcp" >/dev/null || true       # SSH කවදාවත් වහන්නේ නෑ
         ufw allow 'Nginx Full' >/dev/null || true
-        ufw deny "$APP_PORT/tcp" >/dev/null || true         # uvicorn 0.0.0.0 bind කරන නිසා
+        ufw deny "$APP_PORT/tcp" >/dev/null || true
+        ufw delete allow 8443/tcp >/dev/null 2>&1 || true   # පරණ :8443 setup එක
         echo "  ✅ ufw: 80/443 open, $APP_PORT closed (nginx localhost හරහා යනවා)."
     else
-        echo "  ⚠ ufw active නෑ -> port $APP_PORT internet එකට open. ufw enable කරන්න, නැත්නම්"
-        echo "     stream_bot.py වල uvicorn.run(host=\"127.0.0.1\") කරන්න."
+        echo "  ℹ️ ufw active නෑ. uvicorn 127.0.0.1 එකට bind වෙන නිසා $APP_PORT පිටින් නෑ."
+        echo "     Linode Cloud Firewall තියෙනවා නම් 80/443 inbound allow කරන්න."
     fi
+}
+
+OLD_CERT=""; OLD_KEY=""
+
+preflight_ports() {   # 443 වල වෙන service එකක් (xray ආදී) ඉන්නවා නම් නවත්තනවා
+    local owner
+    owner="$(ss -tlnpH 'sport = :443' 2>/dev/null | grep -v '"nginx"' || true)"
+    if [ -n "$owner" ]; then
+        echo "❌ Port 443 දැනටමත් වෙන program එකක් පාවිච්චි කරනවා:" >&2
+        echo "$owner" >&2
+        echo "   ඒක නවත්තන්න (උදා: systemctl disable --now xray) ඊට පස්සේ ආයෙ run කරන්න." >&2
+        exit 1
+    fi
+}
+
+adopt_old_nginx() {   # පරණ :8443 nginx sites අයින් කරලා, ඒවායේ cert එක ගන්නවා
+    local f hit=0 bdir="/root/nginx-old-$TS"
+    for f in /etc/nginx/sites-enabled/* /etc/nginx/conf.d/*.conf; do
+        [ -e "$f" ] || continue
+        [ "$(basename "$f")" == "$SERVICE_NAME" ] && continue
+        grep -Eq 'listen[^;]*:?8443' "$f" || continue
+        hit=1
+        mkdir -p "$bdir"
+        local real; real="$(readlink -f "$f")"
+        local c k
+        c="$(grep -E '^\s*ssl_certificate\s' "$real" | head -n1 | awk '{print $2}' | tr -d ';')"
+        k="$(grep -E '^\s*ssl_certificate_key\s' "$real" | head -n1 | awk '{print $2}' | tr -d ';')"
+        if [ -z "$OLD_CERT" ] && [ -f "$c" ] && [ -f "$k" ] \
+           && openssl x509 -in "$c" -noout -subject 2>/dev/null | grep -q "$DOMAIN_VAL"; then
+            OLD_CERT="$c"; OLD_KEY="$k"
+        fi
+        cp -a "$real" "$bdir/"
+        rm -f "$f"
+        echo "  🧹 පරණ :8443 nginx config අයින් කළා: $f (backup: $bdir)"
+    done
+    [ "$hit" -eq 1 ] || echo "  ℹ️ පරණ :8443 nginx config නෑ."
+    return 0
 }
 
 setup_nginx_ssl() {
     local DOMAIN_VAL="$1"
+    preflight_ports
+    adopt_old_nginx
     local LE_DIR="/etc/letsencrypt/live/$DOMAIN_VAL"
     local SS_DIR="/etc/ssl/vnet"
     local email_args=(--register-unsafely-without-email)
@@ -437,8 +482,11 @@ setup_nginx_ssl() {
         echo "  ℹ️ DNS -> $dns_ips | server -> $my_ip (Cloudflare proxy නම් ok)"
     fi
 
-    # Step 2: Let's Encrypt cert (certbot nginx plugin). තියෙනවා නම් renew වෙන්න ළං වුණාම විතරක් අලුත් වෙනවා.
-    if certbot certonly --nginx -d "$DOMAIN_VAL" --non-interactive --agree-tos \
+    # Step 2: cert. LE cert එක තියෙනවා නම් / ඒක නැතුව පරණ nginx cert එක තියෙනවා නම් ඒක පාවිච්චි කරනවා.
+    if [ ! -f "$LE_DIR/fullchain.pem" ] && [ -n "$OLD_CERT" ]; then
+        echo "  ✅ පරණ cert එකම පාවිච්චි කරනවා: $OLD_CERT"
+        write_nginx_ssl "$DOMAIN_VAL" "$OLD_CERT" "$OLD_KEY"
+    elif certbot certonly --nginx -d "$DOMAIN_VAL" --non-interactive --agree-tos \
             --keep-until-expiring "${email_args[@]}" --deploy-hook "systemctl reload nginx"; then
         echo "  ✅ Let's Encrypt certificate ready."
         write_nginx_ssl "$DOMAIN_VAL" "$LE_DIR/fullchain.pem" "$LE_DIR/privkey.pem"
@@ -453,6 +501,9 @@ setup_nginx_ssl() {
     fi
     nginx_apply
     setup_firewall
+    echo "  → Verify: https://$DOMAIN_VAL"
+    local code; code="$(curl -sk -o /dev/null -w '%{http_code}' --max-time 8 --resolve "$DOMAIN_VAL:443:127.0.0.1" "https://$DOMAIN_VAL/" || true)"
+    echo "     nginx:443 -> app HTTP $code  ($(ss -tlnH 'sport = :443' | wc -l) listener)"
 }
 
 # ─────────────────────────────────────────────
